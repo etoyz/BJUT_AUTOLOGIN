@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             // reset button
             Button resetBtn = binding.resetBtn;
             resetBtn.setOnClickListener(view -> {
-                // TODO
+                sP.edit().remove("id").remove("pw").apply();
                 showDialog();
             });
         }
