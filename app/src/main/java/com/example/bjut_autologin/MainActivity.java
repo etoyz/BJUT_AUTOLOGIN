@@ -31,13 +31,15 @@ public class MainActivity extends AppCompatActivity {
             performLogin();
             // label
             binding.idLabel.setText(getString(R.string.label, sP.getString("id", "")));
-            // reset button
-            Button resetBtn = binding.resetBtn;
-            resetBtn.setOnClickListener(view -> {
-                sP.edit().remove("id").remove("pw").apply();
-                showDialog();
-            });
         }
+
+        // reset button
+        Button resetBtn = binding.resetBtn;
+        resetBtn.setOnClickListener(view -> {
+            sP.edit().remove("id").remove("pw").apply();
+            binding.idLabel.setText("账号信息已清除！");
+            showDialog();
+        });
     }
 
     private void showDialog() {
