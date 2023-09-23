@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FF5722"
+        android:scaleType="center"
+        android:paddingHorizontal="50dp"
+        android:text="请输入新的账号："
+        android:textAlignment="gravity"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <EditText
+        android:id="@+id/userid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:hint="账号"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif"
+        android:hint="密码"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/confirm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#3F51B5"
+        android:paddingHorizontal="20dp"
+        android:text="保存"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+</LinearLayout>
