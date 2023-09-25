@@ -1,7 +1,5 @@
 package com.example.bjut_autologin;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,15 +30,12 @@ public class GetInfoDialog extends DialogFragment {
             if (id.equals("")) { // empty
                 Toast.makeText(getContext(), "账号为空！", Toast.LENGTH_SHORT).show();
             } else {
-                SharedPreferences sP = getActivity().getSharedPreferences("IdAndPw", Context.MODE_PRIVATE);
-                sP.edit().putString("id", id).putString("pw", pw).apply();
                 Toast.makeText(getContext(), "已保存账号：" + id, Toast.LENGTH_SHORT).show();
                 MainActivity activity = (MainActivity) getActivity();
-                activity.confirmInput(id);
+                assert activity != null;
+                activity.confirmInput(id, pw);
                 this.dismiss();
             }
         });
     }
-
-
 }

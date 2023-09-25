@@ -24,13 +24,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         SharedPreferences sP = getSharedPreferences("IdAndPw", Context.MODE_PRIVATE);
+        String id = sP.getString("id", "");
+        String pw = sP.getString("pw", "");
 
-        if (sP.getString("id", "").equals("")) { // empty
+        if (id.equals("")) { // empty
             showDialog();
         } else { // not empty
-            performLogin();
             // label
             binding.idLabel.setText(getString(R.string.label, sP.getString("id", "")));
+            performLogin(id, pw);
         }
 
         // reset button
@@ -47,12 +49,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), null);
     }
 
-    private void performLogin() {
-        // retrieve id and pw
-        SharedPreferences sP = getSharedPreferences("IdAndPw", Context.MODE_PRIVATE);
-        String id = sP.getString("id", "");
-        String pw = sP.getString("pw", "");
-        // perform
+    private void performLogin(String id, String pw) {
         WebView loginPage = binding.loginPage;
         loginPage.getSettings().setJavaScriptEnabled(true);
         String js = "document.getElementsByName('upass')[0].value='" + pw + "';document.getElementsByName('DDDDD')[0].value='" + id + "';document.getElementsByName('0MKKey')[0].click();";
@@ -60,14 +57,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                view.evaluateJavascript(js, null);
+                view.evaluateJavascript(js, null); // inject js
+                loginPage.setWebViewClient(new WebViewClient()); //avoid infinite loop
             }
         });
         loginPage.loadUrl(loginUrl);
     }
 
-    public void confirmInput(String newId) {
+    public void confirmInput(String newId, String newPw) {
+        // save to sp
+        SharedPreferences sP = getSharedPreferences("IdAndPw", Context.MODE_PRIVATE);
+        sP.edit().putString("id", newId).putString("pw", newPw).apply();
+        // label
         binding.idLabel.setText(getString(R.string.label, newId));
-        performLogin();
+        // perform
+        performLogin(newId, newPw);
     }
 }

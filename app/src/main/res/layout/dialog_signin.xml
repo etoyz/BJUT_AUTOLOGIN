@@ -14,7 +14,7 @@
         android:textAlignment="gravity"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:textSize="30dp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/userid"
@@ -48,5 +48,5 @@
         android:text="保存"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:textSize="30dp" />
+        android:textSize="30sp" />
 </LinearLayout>
