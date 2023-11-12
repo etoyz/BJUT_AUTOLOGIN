@@ -6,7 +6,8 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="resetIdInfo">重置账号信息</string>
+    <string name="resetIdInfo">重置密码</string>
+    <string name="refreshPage">重新尝试登录</string>
     <string name="label">已保存账号：%s</string>
 
     <string name="lorem_ipsum">

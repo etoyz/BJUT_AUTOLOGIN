@@ -16,12 +16,16 @@ import com.example.bjut_autologin.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private String loginUrl = "http://lgn.bjut.edu.cn";
+    private final String loginUrl = "http://lgn.bjut.edu.cn";
+    private WebView loginPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // init vars
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        loginPage = binding.loginPage;
+        loginPage.getSettings().setJavaScriptEnabled(true);
         setContentView(binding.getRoot());
         SharedPreferences sP = getSharedPreferences("IdAndPw", Context.MODE_PRIVATE);
         String id = sP.getString("id", "");
@@ -42,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
             binding.idLabel.setText("账号信息已清除！");
             showDialog();
         });
+
+        Button refreshBtn = binding.refreshBtn;
+        refreshBtn.setOnClickListener(v -> {
+            loginPage.reload();
+        });
     }
 
     private void showDialog() {
@@ -50,15 +59,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performLogin(String id, String pw) {
-        WebView loginPage = binding.loginPage;
-        loginPage.getSettings().setJavaScriptEnabled(true);
         String js = "document.getElementsByName('upass')[0].value='" + pw + "';document.getElementsByName('DDDDD')[0].value='" + id + "';document.getElementsByName('0MKKey')[0].click();";
         loginPage.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 view.evaluateJavascript(js, null); // inject js
-                loginPage.setWebViewClient(new WebViewClient()); //avoid infinite loop
+//                loginPage.setWebViewClient(new WebViewClient()); //avoid infinite loop
             }
         });
         loginPage.loadUrl(loginUrl);

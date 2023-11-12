@@ -15,11 +15,11 @@
 
         <TextView
             android:id="@+id/idLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="30sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -30,9 +30,17 @@
 
         <Button
             android:id="@+id/resetBtn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:text="@string/resetIdInfo" />
+
+        <Button
+            android:id="@+id/refreshBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="@string/refreshPage" />
     </LinearLayout>
 
     <WebView
